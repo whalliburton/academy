@@ -6,7 +6,8 @@
            show-unicode-characters
            war
            life
-           nuts-and-bolts))
+           nuts-and-bolts
+           smile))
 
 
 

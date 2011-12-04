@@ -10,6 +10,7 @@
                (:file "math")
                (:file "hilbert-space-filling-curve")
                (:file "war")
+               (:file "drawing")
                (:file "life")
                (:file "nuts-and-bolts")
                (:file "welcome")))
