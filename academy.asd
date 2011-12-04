@@ -13,5 +13,6 @@
                (:file "drawing")
                (:file "life")
                (:file "nuts-and-bolts")
+               (:file "probability")
                (:file "welcome")))
 
