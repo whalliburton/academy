@@ -5,5 +5,6 @@
                (:file "classic-utilities")
                (:file "unicode")
                (:file "randomness")
+               (:file "petals-around-the-rose")
                (:file "welcome")))
 
