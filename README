@@ -1,12 +1,14 @@
 Hello!
 
-My name is William Halliburton and this project is my attempt to share
-the little bit of Common Lisp knowledge and tricks that I have picked
-up over the years and hopefully learn something myself in the
-process. Oh, and to have fun too!
+This is the narrator and this project is my attempt to share the
+little bits of Common Lisp knowledge and tricks that I have picked up
+over the years and to learn something myself in the process. Oh, and
+to have fun too!
 
-This academy project is to be read using github or a git viewer of
-your choice as much discussion will take place in the git commit log.
+The recommended way to become familiar with the academy is to start
+with the first commit either on github or with local git tools and to
+work your way through commits attempting to understand at least the
+jist if not the entirety of what is going on. Or, alternatively, you
+could just fire it up and with the help of HELP, explore.
 
-Peace and happy hacking,
-Will
+Peace and happy hacking!
