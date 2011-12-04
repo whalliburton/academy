@@ -14,5 +14,6 @@
                (:file "life")
                (:file "nuts-and-bolts")
                (:file "probability")
+               (:file "cellular-automata")
                (:file "welcome")))
 
