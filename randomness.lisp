@@ -3,9 +3,9 @@
 (defun random-element (sequence)
   (elt sequence (random (length sequence))))
 
-(defun random-booleans (num)
+(defun random-booleans (num &optional (probability 2))
   (loop for i from 1 to num
-        collect (zerop (random 2))))
+        collect (zerop (random probability))))
 
 (defmacro random-do (&rest statements)
   (let ((length (length statements)))
