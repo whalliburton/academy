@@ -10,7 +10,9 @@
            smile
            visualize-one-in-chance
            visualize-chance
-           draw-cellular-automata))
+           draw-cellular-automata
+           visualize-math-functions))
+
 
 
 

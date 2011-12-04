@@ -11,6 +11,11 @@
   `(let ((*bitmap* (make-bitmap ,width ,height)))
      ,@body))
 
+(defun set-pixel (x y &optional (bitmap *bitmap*))
+  (destructuring-bind (height width) (array-dimensions bitmap)
+    (unless (or (< x 0) (< y 0) (>= x width) (>= y height))
+      (setf (aref bitmap y x) t))))
+
 (defun draw (&optional (bitmap *bitmap*))
   (destructuring-bind (height width) (array-dimensions bitmap)
     (loop for y from 0 to (1- height) by 2
@@ -62,3 +67,13 @@
                              "*  **  *"
                              " *    * "
                              "  ****  "))))
+
+(defun draw-border (&optional (bitmap *bitmap*))
+  (destructuring-bind (height width) (array-dimensions bitmap)
+    (loop for x from 0 to (1- width)
+          do (setf (aref bitmap 0 x) t
+                   (aref bitmap (1- height) x) t))
+    (loop for y from 1 to (- height 2)
+          do (setf (aref bitmap y 0) t
+                   (aref bitmap y (1- width)) t))))
+
