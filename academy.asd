@@ -7,5 +7,6 @@
                (:file "randomness")
                (:file "petals-around-the-rose")
                (:file "math")
+               (:file "hilbert-space-filling-curve")
                (:file "welcome")))
 
