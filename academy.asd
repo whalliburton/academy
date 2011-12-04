@@ -11,5 +11,6 @@
                (:file "hilbert-space-filling-curve")
                (:file "war")
                (:file "life")
+               (:file "nuts-and-bolts")
                (:file "welcome")))
 
