@@ -6,5 +6,6 @@
                (:file "unicode")
                (:file "randomness")
                (:file "petals-around-the-rose")
+               (:file "math")
                (:file "welcome")))
 
