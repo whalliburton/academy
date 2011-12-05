@@ -17,3 +17,11 @@
                  (nreverse
                   (cons list acc))))))
     (when list (rec list nil))))
+
+(defun slurp-file (filename)
+  "Load then entire file of FILENAME into a string."
+  (with-open-file (stream filename :direction :input :if-does-not-exist :error)
+    (let ((seq (make-string (file-length stream))))
+      (read-sequence seq stream)
+      seq)))
+
