@@ -15,5 +15,6 @@
                (:file "nuts-and-bolts")
                (:file "probability")
                (:file "cellular-automata")
+               (:file "i-ching")
                (:file "welcome")))
 

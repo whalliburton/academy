@@ -6,9 +6,9 @@
            show-unicode-characters
            war
            life
-           nuts-and-bolts
            smile
            visualize-one-in-chance
            visualize-chance
            cellular-automata
-           visualize-math-functions))
+           visualize-math-functions
+           i-ching))
