@@ -17,5 +17,6 @@
                (:file "cellular-automata")
                (:file "i-ching")
                (:file "emacs")
+               (:file "remember")
                (:file "welcome")))
 
