@@ -13,5 +13,6 @@
            visualize-math-functions
            i-ching
            bullseye
-           sunbeam))
+           sunbeam
+           remember forget))
 
