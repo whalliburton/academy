@@ -11,10 +11,13 @@
   `(let ((*bitmap* (make-bitmap ,width ,height)))
      ,@body))
 
-(defun set-pixel (x y &optional (bitmap *bitmap*))
+(defun outside-bounds (x y &optional (bitmap *bitmap*))
   (destructuring-bind (height width) (array-dimensions bitmap)
-    (unless (or (< x 0) (< y 0) (>= x width) (>= y height))
-      (setf (aref bitmap y x) t))))
+    (or (< x 0) (< y 0) (>= x width) (>= y height))))
+
+(defun set-pixel (x y &optional (bitmap *bitmap*))
+  (unless (outside-bounds x y bitmap)
+    (setf (aref bitmap y x) t)))
 
 (defun draw (&optional (bitmap *bitmap*))
   (destructuring-bind (height width) (array-dimensions bitmap)
@@ -133,3 +136,23 @@
           do (draw-line 0 (1- size) x 0)
              (draw-line 0 (1- size) (1- size) x))
     (draw)))
+
+(defun fill-bitmap (x y &optional (bitmap *bitmap*))
+  (unless (outside-bounds x y bitmap)
+    (unless (aref bitmap y x)
+      (setf (aref bitmap y x) t)
+      (fill-bitmap (+ x 1) y bitmap)
+      (fill-bitmap (- x 1) y bitmap)
+      (fill-bitmap x (+ y 1) bitmap)
+      (fill-bitmap x (- y 1) bitmap))))
+
+(defun draw-filled-circle (x-center y-center radius &optional (bitmap *bitmap*))
+  (draw-circle x-center y-center radius bitmap)
+  (fill-bitmap x-center y-center bitmap))
+
+(defun sun (&key (size 64))
+  "Draw a sun."
+  (with-bitmap (size size)
+    (let ((mid (floor size 2)))
+      (draw-filled-circle mid mid (1- mid))
+      (draw))))
