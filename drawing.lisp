@@ -111,3 +111,25 @@
       (loop for radius from 2 to mid by step
             do (draw-circle mid mid radius))
       (draw))))
+
+(defun draw-line (xa ya xb yb &optional (bitmap *bitmap*))
+  (let* ((dx (- xb xa))
+         (dy (- yb ya))
+         (steps (if (> (abs dx) (abs dy)) (abs dx) (abs dy)))
+         (xi (/ dx steps))
+         (yi (/ dy steps)))
+    (set-pixel xa ya bitmap)
+    (loop with x = xa
+          with y = ya
+          for k from 0 to (1- steps)
+          do (incf x xi)
+             (incf y yi)
+             (set-pixel (floor x) (floor y) bitmap))))
+
+(defun sunbeam (&key (step 8) (size 64))
+  "Draw a sunbeam."
+  (with-bitmap (size size)
+    (loop for x from 0 to size by step
+          do (draw-line 0 (1- size) x 0)
+             (draw-line 0 (1- size) (1- size) x))
+    (draw)))
