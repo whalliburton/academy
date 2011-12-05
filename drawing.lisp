@@ -77,3 +77,37 @@
           do (setf (aref bitmap y 0) t
                    (aref bitmap y (1- width)) t))))
 
+;;; Described in
+;;; Computer Graphics - Principles and Practice by Donald Hearn and M. Pauline Baker
+
+(defun draw-circle (x-center y-center radius &optional (bitmap *bitmap*))
+  (labels ((pixel (x y) (set-pixel (+ x-center x) (+ y-center y) bitmap))
+           (draw-points (x y)
+             (pixel x     y)
+             (pixel (- x) y)
+             (pixel x     (- y))
+             (pixel (- x) (- y))
+             (pixel y     x)
+             (pixel (- y) x)
+             (pixel y     (- x))
+             (pixel (- y) (- x))))
+    (loop with x = 0
+          with y = radius
+          with p = (- 1 radius)
+          initially (draw-points x y)
+          while (< x y)
+          do (incf x)
+             (if (< p 0)
+               (incf p (+ (* 2 x) 1))
+               (progn
+                 (decf y)
+                 (incf p (+ (* 2 (- x y)) 1))))
+             (draw-points x y))))
+
+(defun bullseye (&optional (size 64) (step 4))
+  "Draw a bullseye."
+  (with-bitmap (size size)
+    (let ((mid (floor size 2)))
+      (loop for radius from 2 to mid by step
+            do (draw-circle mid mid radius))
+      (draw))))

@@ -11,4 +11,6 @@
            visualize-chance
            cellular-automata
            visualize-math-functions
-           i-ching))
+           i-ching
+           bullseye))
+
