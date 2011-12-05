@@ -12,7 +12,8 @@
            draw-cellular-automata
            visualize-math-functions
            i-ching
-           bullseye))
+           bullseye
+           sunbeam))
 
 
 
