@@ -14,5 +14,6 @@
            i-ching
            bullseye
            sunbeam
-           remember forget))
+           remember forget
+           sun))
 
