@@ -16,5 +16,6 @@
                (:file "probability")
                (:file "cellular-automata")
                (:file "i-ching")
+               (:file "emacs")
                (:file "welcome")))
 
