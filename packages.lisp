@@ -8,7 +8,9 @@
            life
            nuts-and-bolts
            smile
-           visualize-one-in-chance))
+           visualize-one-in-chance
+           visualize-chance
+           ))
 
 
 

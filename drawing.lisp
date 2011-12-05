@@ -1,7 +1,9 @@
 (in-package :academy)
 
-(defun make-bitmap (width height)
-  (make-array (list height width) :initial-element nil))
+(defun make-bitmap (width height &optional contents)
+  (if contents
+    (make-array (list height width) :initial-contents contents)
+    (make-array (list height width) :initial-element nil)))
 
 (defvar *bitmap*)
 
