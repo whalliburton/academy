@@ -4,6 +4,7 @@
                (:file "packages")
                (:file "help")
                (:file "classic-utilities")
+               (:file "pretty-printing")
                (:file "unicode")
                (:file "randomness")
                (:file "petals-around-the-rose")
