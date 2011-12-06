@@ -159,3 +159,16 @@
     (let ((mid (floor size 2)))
       (draw-filled-circle mid mid (1- mid))
       (draw))))
+
+;;; Attention Hackers! Exercises are good for the soul.
+;;;
+;;;    Someone with the desire could expand PEACE to draw peace symbols of any size.
+
+(defun peace ()
+  "Peace on Earth."
+  (with-bitmap (12 12)
+    (draw-circle 6 6 5)
+    (draw-line 6 10 6 1)
+    (draw-line 6 6 3 9)
+    (draw-line 6 6 9 9)
+    (draw)))
