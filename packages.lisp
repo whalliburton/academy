@@ -16,4 +16,5 @@
            sunbeam
            remember forget
            sun
-           multiplication-table))
+           multiplication-table
+           peace))
