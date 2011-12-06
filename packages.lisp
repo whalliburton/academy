@@ -15,5 +15,6 @@
            bullseye
            sunbeam
            remember forget
-           sun))
+           sun
+           multiplication-table))
 
