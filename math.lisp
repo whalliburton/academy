@@ -41,3 +41,10 @@
   (loop for (fn start end) in *demo-math-functions*
         do (plot-function fn start end)
            (terpri)))
+
+(defun multiplication-table (&optional (size 16))
+  "Show a 16x16 multiplication table."
+  (print-table
+   (loop for a from 1 to size
+         collect (loop for b from 1 to size
+                       collect (* a b)))))
