@@ -107,12 +107,15 @@
                  (incf p (+ (* 2 (- x y)) 1))))
              (draw-points x y))))
 
-(defun bullseye (&optional (size 64) (step 4))
+(defun bullseye (&key (size 64) (step 4) filled)
   "Draw a bullseye."
   (with-bitmap (size size)
     (let ((mid (floor size 2)))
       (loop for radius from 2 to mid by step
             do (draw-circle mid mid radius))
+      (when filled
+        (loop for x from 2 to mid by (* 2 step)
+              do (fill-bitmap (+ mid x 1) mid)))
       (draw))))
 
 (defun draw-line (xa ya xb yb &optional (bitmap *bitmap*))
