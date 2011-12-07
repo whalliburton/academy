@@ -23,3 +23,18 @@ this file is verified."
    #'asdf:component-pathname
    (remove-if-not (lambda (module) (typep module 'asdf:cl-source-file))
                   (asdf:module-components (asdf:find-system system-name)))))
+
+(defmacro with-output-to-file ((filename &optional (if-exists :supersede)) &body body)
+  `(with-open-file (*standard-output* ,filename :direction :output :if-exists ,if-exists
+                                                :if-does-not-exist :create)
+     ,@body))
+
+(defmacro with-output-to-data-file (filename &body body)
+  (let ((bytes (gensym))
+        (name (gensym)))
+    `(let (,bytes (,name (data-path ,filename :verify nil)))
+       (with-output-to-file (,name)
+         (prog1
+             (progn ,@body)
+           (setf ,bytes (file-position *standard-output*))))
+       (format t "~A bytes written to ~S~%" ,bytes ,name))))
