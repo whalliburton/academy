@@ -21,5 +21,6 @@
                (:file "remember")
                (:file "turtle-graphics")
                #+sbcl (:file "sbcl-nuts-and-bolts")
+               #+sbcl (:file "git")
                (:file "welcome")))
 
