@@ -19,5 +19,6 @@
                (:file "i-ching")
                (:file "emacs")
                (:file "remember")
+               (:file "turtle-graphics")
                (:file "welcome")))
 
