@@ -20,5 +20,6 @@
                (:file "emacs")
                (:file "remember")
                (:file "turtle-graphics")
+               #+sbcl (:file "sbcl-nuts-and-bolts")
                (:file "welcome")))
 
