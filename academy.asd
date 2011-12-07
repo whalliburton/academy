@@ -23,5 +23,6 @@
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
+               #+sbcl (:file "website")
                (:file "welcome")))
 
