@@ -18,5 +18,6 @@
            sun
            multiplication-table
            peace
-           turtle-race))
+           turtle-race
+           save-log))
 
