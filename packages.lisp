@@ -19,5 +19,6 @@
            multiplication-table
            peace
            turtle-race
-           save-log))
+           save-log
+           hall-of-programmers))
 

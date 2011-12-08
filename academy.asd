@@ -26,5 +26,6 @@
                #+sbcl (:file "git")
                #+sbcl (:file "log")
                #+sbcl (:file "website")
+               #+sbcl (:file "hall-of-programmers")
                (:file "welcome")))
 
