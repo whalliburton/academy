@@ -15,23 +15,27 @@
   (destructuring-bind (height width) (array-dimensions bitmap)
     (or (< x 0) (< y 0) (>= x width) (>= y height))))
 
-(defun set-pixel (x y &optional (bitmap *bitmap*))
+(defun set-pixel (x y &optional (bitmap *bitmap*) (value t))
   (unless (outside-bounds x y bitmap)
-    (setf (aref bitmap y x) t)))
+    (setf (aref bitmap y x) value)))
+
+(defvar *comic-strip*)
 
 (defun draw (&optional (bitmap *bitmap*))
-  (destructuring-bind (height width) (array-dimensions bitmap)
-    (loop for y from 0 to (1- height) by 2
-          do (loop for x from 0 to (1- width)
-                   do (princ
-                       (let ((top (aref bitmap y x))
-                             (bottom (when (< y (1- height)) (aref bitmap (1+ y) x))))
-                         (cond
-                           ((and top bottom) #\FULL_BLOCK)
-                           (top              #\UPPER_HALF_BLOCK)
-                           (bottom           #\LOWER_HALF_BLOCK )
-                           (t                #\space)))))
-             (fresh-line))))
+  (if (and (boundp '*comic-strip*) (not (eq bitmap (comic-strip-bitmap *comic-strip*))))
+    (draw-on-comic-strip *comic-strip* bitmap)
+    (destructuring-bind (height width) (array-dimensions bitmap)
+      (loop for y from 0 to (1- height) by 2
+            do (loop for x from 0 to (1- width)
+                     do (princ
+                         (let ((top (aref bitmap y x))
+                               (bottom (when (< y (1- height)) (aref bitmap (1+ y) x))))
+                           (cond
+                             ((and top bottom) #\FULL_BLOCK)
+                             (top              #\UPPER_HALF_BLOCK)
+                             (bottom           #\LOWER_HALF_BLOCK )
+                             (t                #\space)))))
+               (fresh-line)))))
 
 (defun draw-from-list (bit-list width)
   (let ((rows (group bit-list width)))
@@ -172,3 +176,27 @@
     (draw-line 6 6 3 9)
     (draw-line 6 6 9 9)
     (draw)))
+
+(defun copy-bitmap-onto-bitmap (from-bitmap to-bitmap x y)
+  (destructuring-bind (height width) (array-dimensions from-bitmap)
+    (loop for yi from 0 to (1- height)
+          do (loop for xi from 0 to (1- width)
+                   do (set-pixel (+ x xi) (+ y yi) to-bitmap (aref from-bitmap yi xi))))))
+
+(defstruct comic-strip bitmap width height columns rows column)
+
+(defmacro with-comic-strip ((&key (width 32) (height 32) (columns 3)) &body body)
+  `(let ((*comic-strip* (make-comic-strip :bitmap (make-bitmap (* ,width ,columns) 0)
+                                          :width ,width :height ,height :columns ,columns
+                                          :rows 0 :column 0)))
+     ,@body
+     (draw (comic-strip-bitmap *comic-strip*))))
+
+(defun draw-on-comic-strip (strip cell-bitmap)
+  (with-slots (rows column width height columns bitmap) strip
+    (when (= column 0)
+      (incf rows)
+      (setf bitmap
+            (adjust-array bitmap (list (* rows height) (* columns width)) :initial-element nil)))
+    (copy-bitmap-onto-bitmap cell-bitmap bitmap (* column width) (* (1- rows) height))
+    (setf column (mod (1+ column) columns))))
