@@ -40,7 +40,8 @@
     (:miscellaneous-technical #x2300 #x23FF)
     (:number-forms            #x2150 #x218F)
     (:i-ching-trigrams        #x2630 #x2637)
-    (:i-ching-symbols         #x4DC0 #x4DFF)))
+    (:i-ching-symbols         #x4DC0 #x4DFF)
+    (:braille-patterns        #x2800 #x28FF)))
 
 (defun show-unicode-characters (&optional which)
   "Show many sets of unicode arrows, dingbats, boxes, i-ching, etc."
@@ -55,3 +56,13 @@
       (format t "Please select a unicode set to view from the following.~%~%  :all~%")
       (loop for (name) in *sample-unicode-sets*
             do (format t "  ~(~S~)~%" name)))))
+
+(defparameter *ascii-to-braille-map*
+  " A1B'K2L@CIF/MSP\"E3H9O6R^DJG>NTQ,*5<-U8V.%[$+X!&;:4\\0Z7(_?W]#Y)=")
+
+(defun print-in-braille (string)
+  (loop for character across string
+        do (let ((pos (position (char-upcase character) *ascii-to-braille-map*)))
+             (if pos
+               (write-char (code-char (+ #x2800 pos)))
+               (warn "Character ~S is not a valid braille character." character)))))
