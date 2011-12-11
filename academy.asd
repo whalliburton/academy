@@ -25,10 +25,10 @@
                (:file "lists")
                (:file "secrets")
                (:file "common-lisp")
+               (:file "naked-repl")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
                #+sbcl (:file "website")
                #+sbcl (:file "hall-of-programmers")
                (:file "welcome")))
-
