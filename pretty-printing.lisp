@@ -26,3 +26,11 @@
                        (rotate-rows-to-columns rows)))
     for row in (mapcar (lambda (row) (pad-list row max-row-length "")) rows)
     do (apply #'format t control-string row)))
+
+(defun print-heading (text &key (underline "▀"))
+  (terpri)
+  (write-string text)
+  (fresh-line)
+  (dotimes (i (length text)) (write-string underline))
+  (fresh-line)
+  (terpri))
