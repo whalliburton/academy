@@ -7,6 +7,7 @@
                (:file "pretty-printing")
                (:file "input")
                (:file "unicode")
+               (:file "words")
                (:file "randomness")
                (:file "petals-around-the-rose")
                (:file "hilbert-space-filling-curve")

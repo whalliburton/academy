@@ -13,3 +13,7 @@
        ,@(loop for x from 0 to length
                for statement in statements
                collect `(,x ,statement)))))
+
+(defun random-word ()
+  (unless *words* (load-words))
+  (aref *words* (random (length *words*))))
