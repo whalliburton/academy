@@ -16,9 +16,9 @@
       (error "process-failure-exit"))
     process))
 
-(defun run-program-to-string (program args)
+(defun run-program-to-string (program args &key (input t))
   "Run system program PROGRAM with arguments ARGS.
 Returns all the output of standard output and standard error as a string."
   (with-output-to-string (stream)
     (ensure-process-success
-     (sb-ext:run-program program args :output stream :error stream :search t))))
+     (sb-ext:run-program program args :output stream :input input :error stream :search t))))
