@@ -28,6 +28,7 @@
                (:file "secrets")
                (:file "common-lisp")
                (:file "naked-repl")
+               (:file "compliments")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
