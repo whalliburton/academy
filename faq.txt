@@ -1,0 +1,38 @@
+
+Why was the academy create?
+
+1. Learning by teaching. For the narrator and participants to grow.
+
+2. Provide a way for others to learn and experience the entire shebang
+   of lisp programming, with regards to revision control, style,
+   emacs, SLIME, iterative development, top-down, bottom-up,
+   algorithms, optimization, etc. And to see these things added and
+   described on a single repository grown through time.
+
+3. ?
+
+
+
+Who could benefit from the academy?
+
+Programmers lacking ideas presented in the academy or possessing ideas
+that would improve, extend, or complement the academy.
+
+
+
+How can I join the academy?
+
+Membership is earned.
+
+
+
+How can one earn membership in the academy?
+
+Contribute.
+
+
+
+How can one contribute?
+
+Dig deep down into the depths. Become enamored of simple
+ideas. Express simple ideas in Lisp for others to understand.
