@@ -4,6 +4,7 @@
                (:file "packages")
                (:file "help")
                (:file "classic-utilities")
+               (:file "debugging")
                (:file "pretty-printing")
                (:file "input")
                (:file "unicode")
