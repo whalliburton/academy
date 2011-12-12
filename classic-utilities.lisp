@@ -25,3 +25,15 @@
       (read-sequence seq stream)
       seq)))
 
+(defun flatten (tree)
+  "Return a list of all non-nil leaves of TREE."
+  (let (result)
+    (labels ((recur (subtree)
+               (cond
+                 ((consp subtree)
+                  (recur (car subtree))
+                  (recur (cdr subtree)))
+                 ((not (null subtree))
+                  (push subtree result)))))
+      (recur tree)
+      (nreverse result))))
