@@ -38,3 +38,11 @@ this file is verified."
              (progn ,@body)
            (setf ,bytes (file-position *standard-output*))))
        (format t "~A bytes written to ~S~%" ,bytes ,name))))
+
+(defun read-lisp-file (lisp-filename)
+  (with-open-file (stream lisp-filename :direction :input)
+    (let ((*read-eval* nil)
+          (eof (gensym)))
+      (loop for statement = (read stream nil eof)
+            while (not (eq statement eof))
+            collect statement))))
