@@ -2,6 +2,7 @@
   :serial t
   :components ((:static-file "academy.asd")
                (:file "packages")
+               (:file "pedantic-if")
                (:file "help")
                (:file "classic-utilities")
                (:file "debugging")

@@ -1,5 +1,6 @@
 (defpackage academy
   (:use common-lisp)
+  (:shadow if)
   (:export help
            petals-around-the-rose
            hilbert-space-filling-curve
