@@ -37,3 +37,12 @@
                   (push subtree result)))))
       (recur tree)
       (nreverse result))))
+
+(defun mkstr (&rest args)
+  "Writes args into a string and returns that string."
+  (with-output-to-string (s)
+    (dolist (a args) (when a (princ a s)))))
+
+(defun symb (&rest args)
+  "Creates a new symbol from args."
+  (values (intern (apply #'mkstr args))))
