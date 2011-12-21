@@ -30,6 +30,7 @@
                (:file "common-lisp")
                (:file "naked-repl")
                (:file "compliments")
+               (:file "safety")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
