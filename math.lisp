@@ -49,3 +49,10 @@
          collect (loop for b from 1 to size
                        collect (* a b)))
    :align :right))
+
+(defun factorial (number)
+  "Compute the factorial of NUMBER."
+  (loop with acc = 1
+        for x from 1 to number
+        do (setf acc (* acc x))
+        finally (return acc)))
