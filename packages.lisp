@@ -1,6 +1,6 @@
 (defpackage academy
   (:use common-lisp)
-  (:shadow if)
+  (:shadow if push)
   (:export help
            petals-around-the-rose
            hilbert-space-filling-curve
@@ -21,5 +21,13 @@
            peace
            turtle-race
            save-log
-           hall-of-programmers))
+           hall-of-programmers
+           calculator
+           calculate))
+
+(in-package :academy)
+
+;;; !!! A hack to get around package locks to allow for FLETing a new PUSH.
+(defmacro push (&rest args)
+  `(cl:push ,@args))
 
