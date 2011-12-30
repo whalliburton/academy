@@ -36,6 +36,8 @@
                (:file "calculator")
                (:file "cards")
                (:file "chemicals")
+               (:file "chess")
+               (:file "parse-portable-game-notation")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")

@@ -1,0 +1,351 @@
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "R7/P3k3/8/8/8/8/7K/r7 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r5k1/p7/4Nnp1/3q4/8/4Q2R/PP2KP1P/8 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r2q1r2/1ppk1pQp/p2pb3/1P2n3/P7/2P5/4RPPP/1NB1R2K w - - 0 1"]
+[PlyCount "17"]
+[EventDate "1998.??.??"]
+
+1. Rxe5 dxe5 2. Rd1+ {And now best is} 2... Kc8 ({Not} 2... Ke7 $4 3. Rxd8 (3.
+Bg5+ {Skewering the queen. Note that the f-pawn is pinned by the White queen.})
+3... Rfxd8 4. Bg5+ {Skewering the rook.} ({Not} 4. g3 Rd1+ 5. Kg2 Kd7 (5...
+Rxc1 $4 6. Qg5+ {picks up the rook.}) 6. Qxe5 {
+and White still has a small plus.}) 4... Kd7 5. Bxd8 Rxd8 {
+White has a queen for a rook; easy win for White from here.}) 3. Rxd8+ Rxd8 4.
+Nd2 {And White has queen and knight for two rooks, only temporarily though, as
+it turns out.} 4... axb5 5. a5 Rxa5 6. Qxe5 Ra1 7. Qe1 Rd3 8. Nf3 (8. Nf1 b4 9.
+cxb4 Rb3 10. Ng3 Rxb4 11. h3 Rbb1 12. Ne2 Bc4 13. Kh2 b5 {Fritz sees this as =
+but I think Black's going to try to ram those passers down White's throat. He
+just might succeed, too!}) 8... Bb3 9. Ng1 {
+Which side would you rather be playing?} *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3r3r/pRn2k1B/2p5/4q3/2p3Q1/4B3/P1P4P/7K w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r1bq1rk1/pp1n2bp/3n2p1/3Npp2/2P5/1P2P1P1/P3N1BP/R1BQ1RK1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "8/k5r1/8/2KB4/8/8/8/1R6 w - - 0 1"]
+[PlyCount "11"]
+[EventDate "1998.??.??"]
+
+1. Ra1+ Kb8 2. Ra8+ Kc7 3. Ra7+ {White wins the rook - but that's not the end
+of this problem, next look for the quickest way to mate!} 3... Kc8 (3... Kd8 4.
+Rxg7 Kc8 (4... Ke8 5. Kd6 {and mate next.}) 5. Kd6 Kb8 6. Rh7 Kc8 7. Rh8#) (
+3... Kb8 4. Rxg7 Kc8 5. Kd6 Kb8 6. Rh7 Kc8 7. Rh8#) 4. Rxg7 Kb8 (4... Kd8 5.
+Kd6 {and mate next.}) 5. Kd6 Kc8 6. Rg8# *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3q2Q1/r2k4/1ppr1p1B/p2ppP2/P3P3/1BPP4/1P3PK1/7R w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3Q4/5knp/1nN3p1/2p5/5P2/1q6/1P4PP/6K1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "1n2k2r/rp4pp/pN3p2/2n1p3/4P3/N7/PP2KPPP/R6R w k - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "8/b6Q/p3kpn1/1p1q1b2/3PpP2/1P2P3/PB5P/5BK1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "1R1Rbrk1/p5pp/2pQ4/2P1p3/5q2/8/P4PPP/6K1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "rn3rk1/pbp1qppp/1p2pn2/3p4/1bPP1B2/5NP1/PP2PPBP/RN1Q1RK1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3R4/3R3p/5p1k/6n1/8/1P2QPPq/r7/6K1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r2rbb1Q/3q1k2/6pp/np1p4/8/P3P3/1B3PPP/1BR2RK1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3rr1k1/pp1q1pp1/2b3np/4P3/3B1P2/1P2N1Pn/P1R3BP/Q1R4K w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r4r2/pp2Q3/5p1p/6k1/7R/8/PPq2PPP/R5K1 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r1b1k2r/2q2ppp/p1n1pn2/1pb5/3N4/2N1P3/PP2BPPP/R1BQ1RK1 w kq - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "White to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "8/8/2Q4p/5p1k/P7/5PP1/b6K/q7 w - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "3rq2r/2pbn1k1/1p3p2/p1b1p1pp/P1N1P3/1PPB2P1/2N1QPP1/3R1RK1 b - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "1k1r3r/1pp3p1/p3R3/7p/1b6/8/PP3PPP/R1Bq1QK1 b - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r1bqk2r/1pp2ppp/pb1p4/4n3/PPB1P3/2P5/R3QPPP/1NB1R1K1 b kq - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "2k1r3/2p4p/5b2/1NpK4/4p1bN/1P4P1/P4P2/7R b - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "1r4k1/prp1ppbp/2b2np1/3P4/2p2B2/2N1PN1P/PP1R1PP1/2K4R b - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
+[Event "Black to move & win"]
+[Site "?"]
+[Date "1998.??.??"]
+[Round "?"]
+[White "1001 Winning Chess Sacrifices"]
+[Black "and Combinations"]
+[Result "*"]
+[SetUp "1"]
+[FEN "r4rk1/1bp3pp/4p3/1p1q4/p2P4/P5P1/1PPQR1NP/2KR4 b - - 0 1"]
+[PlyCount "0"]
+[EventDate "1998.??.??"]
+
+ *
+
