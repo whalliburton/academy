@@ -25,6 +25,7 @@
            calculator
            calculate
            play-cards
+           chemical
            ))
 
 (in-package :academy)
