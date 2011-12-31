@@ -34,3 +34,22 @@
   (dotimes (i (length text)) (write-string underline))
   (fresh-line)
   (terpri))
+
+(defun print-in-box (string)
+  (flet ((print-times (count string) (dotimes (x count) (princ string))))
+    (let* ((lines (split-string-into-lines string))
+           (columns (apply #'max (mapcar #'length lines))))
+      (princ "┌") (print-times columns "─") (princ "┐") (fresh-line)
+      (loop for line in lines
+            do (princ "│")
+               (princ line)
+               (print-times (- columns (length line)) " ")
+               (princ "│")
+               (fresh-line))
+      (princ "└") (print-times columns "─") (princ "┘")
+      (fresh-line))))
+
+(defmacro print-boxed (&rest body)
+  `(print-in-box
+    (with-output-to-string (*standard-output*)
+      ,@body)))
