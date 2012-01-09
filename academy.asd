@@ -31,6 +31,7 @@
                (:file "naked-repl")
                (:file "compliments")
                (:file "safety")
+               (:file "phonetic-alphabet")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
