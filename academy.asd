@@ -34,6 +34,7 @@
                (:file "safety")
                (:file "phonetic-alphabet")
                (:file "calculator")
+               (:file "cards")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")

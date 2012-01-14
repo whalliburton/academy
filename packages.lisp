@@ -23,7 +23,9 @@
            save-log
            hall-of-programmers
            calculator
-           calculate))
+           calculate
+           play-cards
+           ))
 
 (in-package :academy)
 
