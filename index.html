@@ -1,9 +1,13 @@
 <html>
-      <head>
-      <title>⚡ ⚕ The academy ⚛ ♬</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      </head>
-      <body style="background:black;color:white;font-size:24px;"><pre>Genesis
+<head>
+<style type="text/css">
+@font-face{font-family:"Terminus"; src:url("terminus.ttf") format("truetype");}
+pre {font-family:"Terminus", serif; font-size:24px; line-height:24px;}
+</style>
+<title>⚡ ⚕ The academy ⚛ ♬</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body style="background:black;color:white;font-size:24px;"><pre>Genesis
 
 In the beginning Man created the computer. Now the computer was
 formless and empty, darkness was over the surface of the deep, and the
@@ -1408,7 +1412,7 @@ fill-bitmap
 
 print-table
 
-> (loop for args in '(nil (:gap "$$") (:align :left))
+> (loop for args in '((:align :right) (:gap "$$") nil)
         do (apply #'print-table
                   (loop for x from 1 to 6
                         collect
@@ -1665,8 +1669,6 @@ star
                     ██
                     █
                     ▀
-
-+ turtle
 
 ---
 
@@ -2638,6 +2640,362 @@ misrepresentation's  misrepresentations  misrepresented  misrepresenting      mi
           mixture's            mixtures          mizzen         mizzen's         mizzenmast
        mizzenmast's         mizzenmasts         mizzens         mnemonic          mnemonics
         mnemonics's                moan          moan's           moaned            moaning
+
+---
+
+bugout
+
+BUGOUT is used to insert printouts at various points in developing code.
+
+BUGOUTs are never left in code, but rather, inserted at select points
+while iteratively developing to see the state of variables at those
+points.
+
+> (let ((a 1) (b 2)) (bugout a b :foo (+ a b)))
+
+>>>  A 1  B 2  :FOO  (+ A B) 3
+
+The above BUGOUT macro expanded into
+
+  (FORMAT T "~%>>>  A ~S  B ~S  :FOO  (+ A B) ~S~2%" A B (+ A B))
+
+---
+
+breakout
+
+BREAKOUT is like BUGOUT, but signals a BREAK with the select variables
+being the arguments to this BREAK. This allows for easily inserting
+breakpoints that give readouts of variables and also further access
+from within the SLIME debugger backtrace to these variables.
+
+---
+
+flatten
+
+Pay Attention!! A classic utility is being introduced here!
+
+FLATTEN takes trees of CONSes and returns all the non-NIL leaves.
+
+> (flatten '(1 nil 2))
+(1 2)
+
+> (flatten '(1 (2 (3))))
+(1 2 3)
+
+> (flatten '(1 (2 (3) (4 (5 6)))))
+(1 2 3 4 5 6)
+
+Yes, fellow acadamians, Lisp supports trees out of the box!
+
+---
+
+read-lisp-file
+
+> (read-lisp-file "/emerald-city/academy/war.lisp")
+((IN-PACKAGE :ACADEMY)
+ (DEFUN WAR ()
+   "Global Thermonuclear War"
+   (FORMAT T "A strange game. The only winning move is not to play.~%")))
+
+This commit demonstrates the method of using a GENSYM for the
+EOF-VALUE for READ.
+
+---
+
+show-all-used-common-lisp-symbols
+
+For listing all the symbols in a particular package that come from the CL package.
+
+> (show-all-used-common-lisp-symbols :academy)
+
+functions
+▀▀▀▀▀▀▀▀▀
+
+*                    +                       -                     /
+/=                   1+                      1-                    <
+<=                   =                       >                     >=
+ABS                  ADJUST-ARRAY            AND                   APPLY
+AREF                 ARRAY-DIMENSIONS        ASSOC                 ASSOC-IF
+ATAN                 BOUNDP                  BREAK                 CAR
+CASE                 CDDDR                   CDR                   CHAR
+CHAR-CODE            CHAR-NAME               CHAR-UPCASE           CHAR=
+CHARACTER            CODE-CHAR               COERCE                CONCATENATE
+COND                 CONS                    CONSP                 COS
+COUNT                DECF                    DEFMACRO              DEFPACKAGE
+DEFPARAMETER         DEFSTRUCT               DEFUN                 DEFVAR
+DESTRUCTURING-BIND   DIGIT-CHAR-P            DIRECTORY-NAMESTRING  DO
+DOCUMENTATION        DOTIMES                 ECASE                 ELT
+EQ                   EQL                     EQUAL                 EQUALP
+ERROR                EVENP                   EVERY                 FBOUNDP
+FILE-LENGTH          FILE-POSITION           FIND                  FIND-SYMBOL
+FIRST                FLET                    FLOOR                 FORCE-OUTPUT
+FORMAT               FRESH-LINE              FUNCALL               FUNCTION
+GENSYM               GET-UNIVERSAL-TIME      GETHASH               HANDLER-CASE
+IDENTITY             IF                      IN-PACKAGE            INCF
+INTERSECTION         KEYWORDP                LABELS                LAMBDA
+LENGTH               LET                     LET*                  LIST
+LISTP                LOGAND                  LOGBITP               LOGCOUNT
+LOOP                 MACROLET                MAKE-ARRAY            MAKE-HASH-TABLE
+MAKE-LIST            MAKE-STRING             MAP                   MAPCAR
+MAX                  MEMBER                  MINUSP                MOD
+MULTIPLE-VALUE-BIND  NOT                     NREVERSE              NTH
+NTHCDR               NULL                    OR                    PARSE-INTEGER
+PLUSP                POSITION                PRIN1                 PRINC
+PRINC-TO-STRING      PROBE-FILE              PROG1                 PROGN
+PUSH                 QUOTE                   RANDOM                READ
+READ-FROM-STRING     READ-LINE               READ-SEQUENCE         REDUCE
+REMOVE-DUPLICATES    REMOVE-IF               REMOVE-IF-NOT         REST
+RETURN               REVERSE                 ROUND                 SECOND
+SET                  SETF                    SIN                   SORT
+STEP                 STRING                  STRING-DOWNCASE       STRING<
+SUBSEQ               SYMBOL-FUNCTION         SYMBOL-NAME           SYMBOLP
+TAN                  TERPRI                  THIRD                 TYPEP
+UNLESS               VALUES                  VECTOR                WARN
+WHEN                 WITH-INPUT-FROM-STRING  WITH-OPEN-FILE        WITH-OUTPUT-TO-STRING
+WITH-SLOTS           WRITE-CHAR              WRITE-STRING          ZEROP
+
+everything else
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+
+&BODY        &KEY                &OPTIONAL  &REST
+*READ-EVAL*  *STANDARD-OUTPUT*   NUMBER     PARSE-ERROR
+PI           SEQUENCE            STREAM     SYMBOL
+T            UNDEFINED-FUNCTION
+
+---
+
+add :INPUT argument to RUN-PROGRAM-TO-STRING
+
+> (with-input-from-string (stream "foo") (run-program-to-string "cat" nil :input stream))
+"foo"
+
+---
+
+spelling
+
+> (spellcheck "Is that a snarfle is see yonder?")
+("snarfle")
+
+> (spellcheck-docstrings :academy)
+
+SPELLCHECK-DOCSTRINGS : spelllling
+...
+
+---
+
+faq.txt
+
+How can I join the academy?
+
+Membership is earned.
+
+---
+
+compliments
+
+> (compliment)
+You are so eloquent.
+
+---
+
+pedantic-if
+
+IFs with no else clause should always be replaced with a WHEN. Here we
+shadow the standard IF with our own that warns when we violate this
+style rule.
+
+> (defun foo (a) (if (eq a :foo) :baz))
+; in: DEFUN FOO
+;     (ACADEMY::IF (EQ ACADEMY::A :FOO) :BAZ)
+;
+; caught WARNING:
+;   A single legged IF should be replaced with a WHEN.
+;
+; compilation unit finished
+;   caught 1 WARNING condition
+FOO
+
+> (foo :foo)
+:BAZ
+
+> (foo 123)
+NIL
+
+This commit demonstrates
+
+  * Shadowing core CL functionality with our own cooked up versions.
+  * Using the optional SUPPLIED-P-PARAMETER to distinguish between a
+    supplied NIL and no argument.
+
+---
+
+factorial
+
+> (print-table (loop for x from 1 to 64 collect (list x (factorial x))))
+
+1   1
+2   2
+3   6
+4   24
+5   120
+6   720
+7   5040
+8   40320
+9   362880
+10  3628800
+11  39916800
+12  479001600
+13  6227020800
+14  87178291200
+15  1307674368000
+16  20922789888000
+17  355687428096000
+18  6402373705728000
+19  121645100408832000
+20  2432902008176640000
+21  51090942171709440000
+22  1124000727777607680000
+23  25852016738884976640000
+24  620448401733239439360000
+25  15511210043330985984000000
+26  403291461126605635584000000
+27  10888869450418352160768000000
+28  304888344611713860501504000000
+29  8841761993739701954543616000000
+30  265252859812191058636308480000000
+31  8222838654177922817725562880000000
+32  263130836933693530167218012160000000
+33  8683317618811886495518194401280000000
+34  295232799039604140847618609643520000000
+35  10333147966386144929666651337523200000000
+36  371993326789901217467999448150835200000000
+37  13763753091226345046315979581580902400000000
+38  523022617466601111760007224100074291200000000
+39  20397882081197443358640281739902897356800000000
+40  815915283247897734345611269596115894272000000000
+41  33452526613163807108170062053440751665152000000000
+42  1405006117752879898543142606244511569936384000000000
+43  60415263063373835637355132068513997507264512000000000
+44  2658271574788448768043625811014615890319638528000000000
+45  119622220865480194561963161495657715064383733760000000000
+46  5502622159812088949850305428800254892961651752960000000000
+47  258623241511168180642964355153611979969197632389120000000000
+48  12413915592536072670862289047373375038521486354677760000000000
+49  608281864034267560872252163321295376887552831379210240000000000
+50  30414093201713378043612608166064768844377641568960512000000000000
+51  1551118753287382280224243016469303211063259720016986112000000000000
+52  80658175170943878571660636856403766975289505440883277824000000000000
+53  4274883284060025564298013753389399649690343788366813724672000000000000
+54  230843697339241380472092742683027581083278564571807941132288000000000000
+55  12696403353658275925965100847566516959580321051449436762275840000000000000
+56  710998587804863451854045647463724949736497978881168458687447040000000000000
+57  40526919504877216755680601905432322134980384796226602145184481280000000000000
+58  2350561331282878571829474910515074683828862318181142924420699914240000000000000
+59  138683118545689835737939019720389406345902876772687432540821294940160000000000000
+60  8320987112741390144276341183223364380754172606361245952449277696409600000000000000
+61  507580213877224798800856812176625227226004528988036003099405939480985600000000000000
+62  31469973260387937525653122354950764088012280797258232192163168247821107200000000000000
+63  1982608315404440064116146708361898137544773690227268628106279599612729753600000000000000
+64  126886932185884164103433389335161480802865516174545192198801894375214704230400000000000000
+
+---
+
+* split-string-on-character
+
+ACADEMY> (split-string-on-character "Some line from TAZ." #\space)
+("Some" "line" "from" "TAZ.")
+
+---
+
+* git-commits
+
+
+---
+
+* git-branch
+
+
+---
+
+* git-commit-subject
+
+
+---
+
+* safety
+
+
+---
+
+* mkstr symb
+
+
+---
+
++ naked-repl
+
+
+---
+
++ draw-cellular-
+
+
+---
+
++ life
+
+
+---
+
++ print-table
+
+
+---
+
+calculator
+
+> (calculator)
+Welcome to the academy's reverse polish notation (RPN) calculator.
+> pi 2 *
+6.283185307179586
+> 32
+6.283185307179586
+32
+> /
+0.19634954084936207
+> 16 *
+3.141592653589793
+> clear
+> help
+Where to start
+  HELP  SETTINGS
+How to exit
+  QUIT
+Stack Handling
+  CLEAR  DEPTH  DROP  DROP2  DROPN  DUP  DUP2  DUPN
+  OVER   PICK   PS    ROLL   ROLLD  ROT  SWAP  UNDO
+Arithmetical Operations
+  !    %CH   %T    *     +     -     /    ABS
+  ARG  ASR   C->R  CEIL  CONJ  DECR  EXP  FP
+  IM   INCR  INV   MAX   MIN   MOD   NEG  R->C
+  RE   RND   SIGN  SQ    SQRT  ^
+Trigonometry
+  ACOS  ASIN  ATAN  COS  D->R  DEG  R->D  RAD
+  SIN   TAN
+Logarithms
+  ACOSH  ALOG  ASINH  ATANH  COSH  LN   LOG  SINH
+  TANH
+Constants
+  E  PI
+Logical and Binary Operations
+  <    <=  >   >=   AND  BIN  DEC  HEX
+  OCT  OR  SL  SLB  SR   SRB
+Input/Output
+  DISP
+Statistics
+  PERM  RAND
+Control Structures
+  ELSE  END  IF  THEN
 
 ---
 </pre></body></html>
