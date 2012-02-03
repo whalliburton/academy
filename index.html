@@ -2800,9 +2800,18 @@ You are so eloquent.
 
 pedantic-if
 
-IFs with no else clause should always be replaced with a WHEN. Here we
-shadow the standard IF with our own that warns when we violate this
-style rule.
+IFs with no else clause or a NIL else clause should always be replaced
+with a WHEN.
+
+Adhering to style has concrete advantages. The advantage is that it
+decreases the mental effort required for a human to parse and
+understand the code. In this case, if adhered to, every IF you see
+will always have an else clause. You can count on it. Ignore this
+style and every time you see an IF you wont know until you read
+further in the code. A definite advantage and valuable.
+
+Here we shadow the standard IF with our own that warns when we violate
+these style rules.
 
 > (defun foo (a) (if (eq a :foo) :baz))
 ; in: DEFUN FOO
@@ -2820,6 +2829,9 @@ FOO
 
 > (foo 123)
 NIL
+
+> (if :foo :baz nil)
+WARNING: An if's else of NIL should be replaced with a WHEN.
 
 This commit demonstrates
 
@@ -2900,102 +2912,264 @@ factorial
 
 ---
 
-* split-string-on-character
+safety
 
-ACADEMY> (split-string-on-character "Some line from TAZ." #\space)
-("Some" "line" "from" "TAZ.")
+Common lisp's READ function parses a stream of characters and returns
+lisp objects.
+
+Now, by object, I'm not talking Object Orientated Programming (OOP),
+but rather one of the many different types of things that lisp can
+work with such as strings, numbers, and lists (well, really 'cons'
+cells but that is to be described elsewhere).
+
+With no arguments, READ reads from the keyboard:
+
+> (read)
+2.718    <- you type this in
+2.718    <- what READ returns after converting to a lisp object
+
+So READ parsed the stream of characters '2' '.' '7' '1' '8' and
+returned the floating point number 2.718.
+
+> (read)
+foo
+FOO
+
+READ parsed the characters 'f' 'o' 'o' and returned the symbol FOO.
+
+> (read)
+"foo"
+"foo"
+
+> (read)
+(we love lisp)
+(WE LOVE LISP)
+
+You get the idea.
+
+Now, how the READ function does this is with the use of a thing called
+a 'readtable' which contains all the rules for how to deal with
+characters it is trying to parse.
+
+In the standard readtable, the character sequence '#' followed by '.'
+causes the reader to EVALuate the results of calling READ on the rest
+of the sequence of characters.
+
+Clear? Hmm....
+
+> (read)
+(+ 1 2)
+(+ 1 2)
+
+The reader parses '(' '+' ' ' '1' ' ' '2' ')' into the list (+ 1 2).
+
+> (read)
+ #.(+ 1 2)
+3
+
+Note that the extra space above before the '#' is so that git doesn't
+think the line is a comment and remove it.
+
+The reader read '#' followed by '.' and then recursively called itself
+to READ the sequence of characters '(' '+' ' ' '1' ' ' '2' ')' into
+the list (+ 1 2) and then called EVAL on this list to get the result,
+3.
+
+> (read )
+(+ #.(+ 1 2) 4)
+(+ 3 4)
+
+> (read)
+ #.(+ #.(+ 1 2) 4)
+7
+
+Now, this is all fine and dandy and useful *except* when this behavior
+is not desirable. One very common case is when reading things from a
+user or some other source where you do not have complete control as
+this functionality allows for running *anything* in the system via
+this input stream of characters.
+
+BAD BAD things can happen if you do not account for this.
+
+> (defun my-moon-weight? ()
+    (format t "What is your weight in pounds?~%")
+    (let ((weight (read)))
+      (format t "On the moon you would weigh ~F pounds.~%" (/ weight 6))))
+MY-MOON-WEIGHT?
+
+> (my-moon-weight?)
+What is your weight in pounds?
+165
+On the moon you would weight 27.5 pounds.
+
+This function does not check the validity of the input but that seems
+OK because at least it will error out pretty quickly on bad input.
+
+> (my-moon-weight?)
+What is your weight in pounds?
+one cheeseburger
+ERROR: Argument X is not a NUMBER: ONE
+
+All seems OK, but now see...
+
+> (defun boo () (princ "Mwaaahhaahaa!!")
+BOO
+
+> (my-moon-weight?)
+What is your weight in pounds?
+ #.(boo)
+Mwaaahhaahaa!!
+
+So the user has been able to run arbitrary code from this simple
+little function, which might have been happily linked to a web page or
+something open to the world. Oops.
+
+The standard readtable has a variable *READ-EVAL* which controls
+whether or not the sequence '#' '.' works or errors. Note that the
+default is T.
+
+This commit introduces SAFE-READ, which is a shortcut for binding
+*READ-EVAL* to NIL.
+
+> (safe-read)
+ #.(boo)
+ERROR: can't read #. while *READ-EVAL* is NIL
+
+The academy will always use SAFE-READ when reading from the keyboard
+or anywhere that we do not have complete control of both the
+horizontal and the vertical.
 
 ---
 
-* git-commits
+phonetic-alphabet
 
-
----
-
-* git-branch
-
+> (string-to-phonetic-alphabet "academy")
+(ALFA CHARLIE ALFA DELTA ECHO MIKE YANKEE)
 
 ---
 
-* git-commit-subject
+apple-ii-disks
 
+> (show-apple-disk-catalog)
+Catalog of DOS disk "/emerald-city/academy/vintage/prisoner.dsk".
+HELLO        APPLESOFT-BASIC
+CAT          INTEGER-BASIC
+EDU-WARE     APPLESOFT-BASIC
+TONES        BINARY
+PR.BEGIN     APPLESOFT-BASIC
+PR.SQ1       APPLESOFT-BASIC
+PR.VILLAGE   APPLESOFT-BASIC
+PR.SCHOOL    APPLESOFT-BASIC
+...
 
----
-
-* safety
-
-
----
-
-* mkstr symb
-
-
----
-
-+ naked-repl
-
-
----
-
-+ draw-cellular-
-
-
----
-
-+ life
-
-
----
-
-+ print-table
-
-
----
-
-calculator
-
-> (calculator)
-Welcome to the academy's reverse polish notation (RPN) calculator.
-> pi 2 *
-6.283185307179586
-> 32
-6.283185307179586
-32
-> /
-0.19634954084936207
-> 16 *
-3.141592653589793
-> clear
-> help
-Where to start
-  HELP  SETTINGS
-How to exit
-  QUIT
-Stack Handling
-  CLEAR  DEPTH  DROP  DROP2  DROPN  DUP  DUP2  DUPN
-  OVER   PICK   PS    ROLL   ROLLD  ROT  SWAP  UNDO
-Arithmetical Operations
-  !    %CH   %T    *     +     -     /    ABS
-  ARG  ASR   C->R  CEIL  CONJ  DECR  EXP  FP
-  IM   INCR  INV   MAX   MIN   MOD   NEG  R->C
-  RE   RND   SIGN  SQ    SQRT  ^
-Trigonometry
-  ACOS  ASIN  ATAN  COS  D->R  DEG  R->D  RAD
-  SIN   TAN
-Logarithms
-  ACOSH  ALOG  ASINH  ATANH  COSH  LN   LOG  SINH
-  TANH
-Constants
-  E  PI
-Logical and Binary Operations
-  <    <=  >   >=   AND  BIN  DEC  HEX
-  OCT  OR  SL  SLB  SR   SRB
-Input/Output
-  DISP
-Statistics
-  PERM  RAND
-Control Structures
-  ELSE  END  IF  THEN
+> (show-apple-disk-file "PR.CHURCH")
+PR.CHURCH APPLESOFT-BASIC
+1  ZZ=FRE(0) : POKE -16368,0
+2  ONERR GOTO 32000
+9  GOTO 1000
+300  TEXT  : INVERSE  : L3%=3 : L4%=23 : H3%=4 : H4%=7 : GOSUB 395 : RETURN
+310  NORMAL  : POKE 32,16 : POKE 33,21 : POKE 34,15 : POKE 35,18 : HOME  : RETURN
+350  FOR I3=1 TO 2500 : NEXT I3 : RETURN
+395  T1%=L4%-L3%+1 : VTAB H3% : FOR I3=H3% TO H4% : HTAB L3% : PRINT SPC(T1%) : PRINT  : NEXT I3 : RETURN
+400  GOSUB 500 : GOSUB 310 : INPUT IP$ : IP$=IP$+" " : A$=LEFT$ (IP$,1) : RETURN
+500  GOSUB 300 : INVERSE  : VTAB 4
+501  A%=21 : IF LEN(TP$)<22 THEN HTAB 3 : PRINT TP$ : RETURN
+503  IF MID$(TP$,A%,1)<>" " THEN A%=A%-1 : GOTO 503
+505  HTAB 3 : PRINT LEFT$ (TP$,A%-1) : TP$=MID$(TP$,A%+1,LEN(TP$)-A%) : GOTO 501
+650  GOSUB 400 : IF A$="N" THEN T2%=T2%+1
+651  RETURN
+655  GOSUB 400 : IF A$<>"N" THEN T2%=T2%+1
+656  RETURN
+1000  GOSUB 10000
+1003  TP$="WILL YOU MAKE A 5 CREDIT CONTRIBUTION TO OUR CHURCH?" : GOSUB 500 : GOSUB 310 : INPUT IP$ : IF LEFT$ (IP$,1)<>"Y" THEN ID%=ID%+5 : GOTO 1008
+1005  IF CR%>4 THEN CR%=CR%-5
+1008  IF MR% THEN TP$="I UNDERSTAND YOU'VE GOTTEN YOURSELF INTO SOME TROUBLE, MY SON" : GOSUB 500 : GOSUB 350 : TP$="PLEASE FEEL FREE TO TALK ABOUT IT IF YOU WILL" : GOSUB 500 : GOTO 1013
+1010  TP$="GREETINGS, MY CHILD. SHALL WE HAVE A CHAT?" : GOSUB 500
+1011  GOSUB 310 : INPUT IP$ : IF LEFT$ (IP$,1)="N" THEN TP$="AS YOU WISH. IF YOU NEED SOMEONE TO TALK TO, I AM HERE" : GOSUB 500 : GOSUB 350 : GOTO 1020
+1012  TP$="DON'T WORRY. ALL IS KEPT IN CONFIDENCE IN THESE CHAMBERS" : GOSUB 500 : CT%=ID%
+1013  GOSUB 2000
+1015  IF NOT(PS%(4)) AND ID%-CT%>10+INT(RND(1)* 20) THEN PS%(4)=PS%(4)+1 : TP$="TO COMFORT YOU IN THESE TIMES I AM GIVING YOU THIS CROSS" : GOSUB 500 : GOSUB 350
+1020  TP$="REMAIN STRONG, MY CHILD" : GOSUB 500
+1030  TEXT  : NORMAL  : PRINT  : PRINT CH$
+1035  CALL 520"PR.VILLAGE"
+1999  END
+2000  TP$="" : T1%=0 : GOSUB 310 : INPUT IP$ : IP$=IP$+"   " : FOR I=1 TO LEN(IP$)-2 : A$=MID$(IP$,I,3) : IF A$="WHO" OR A$="WHA" OR A$="WHE" OR A$="HOW" OR A$="WHY" OR A$="?  " THEN T1%=1 : GOTO 2010
+2003  IF A$="ESC" OR A$="OFF" OR A$="LEA" OR A$="RUN" OR A$="PRI" OR A$="OUT" THEN T1%=2 : GOTO 2010
+2004  IF A$="FUC" OR A$="SHI" OR A$="ASS" OR A$="BAS" OR A$="BIT" OR A$="DAM" THEN T1%=3 : GOTO 2010
+2005  IF MR% AND (A$="MUR" OR A$="KIL" OR A$="COU" OR A$="GIR") THEN T1%=4 : GOTO 2010
+2006  IF A$="BYE" THEN T1%=5 : GOTO 2010
+2007  IF A$=RC$ THEN T1%=6 : GOTO 2010
+2008  IF A$="ELP" THEN T1%=7 : GOTO 2010
+2009  NEXT I : GOTO 2013
+2010  I=I+2 : NEXT I
+2013  T1%=T1%+1 : ON T1% GOTO 2100,2200,2300,2400,2500,2600,2700,2800
+2020  GOSUB 500 : T1%=0 : GOTO 2000
+2100  IF MR% AND INT(RND(1)* 2) THEN ON INT(RND(1)* 3)+1 GOSUB 15001,15002,15003 : GOTO 2020
+2103  ON INT(RND(1)* 11)+1 GOSUB 11001,11002,11003,11004,11005,11006,11007,11008,11009,11010,11011 : GOTO 2020
+2200  ON INT(RND(1)* 6)+1 GOSUB 12001,12002,12003,12004,12005,12006 : ID%=ID%+1 : GOTO 2020
+2300  ID%=ID%+3 : IF ID%>400 AND INT(RND(1)* 1.1) THEN 3000
+2303  ON INT(RND(1)* 4)+1 GOSUB 13001,13002,13003,13004,13005 : GOTO 2020
+2400  TP$="FOUL LANGUAGE WILL NOT WIN YOU FRIENDS" : ID%=ID%-1 : GOTO 2020
+2500  GOTO 3000
+2600  RETURN
+2700  POP  : NORMAL  : PRINT  : PRINT CH$
+2703  CALL 520"PR.LOSE"
+2800  TP$="I AM HERE TO HELP YOU" : GOTO 2020
+3000  TP$="YOU ARE INDEED IN TROUBLE. I MAY BE ABLE TO HELP YOU. ARE YOU INTERESTED?" : GOSUB 400 : IF A$="N" THEN TP$="AS YOU WISH. BUT PLEASE CONSIDER MY OFFER" : GOSUB 500 : GOTO 2000
+3003  TP$="PLEASE CONSIDER CAREFULLY. HAVE YOU EVER ESCAPED FROM THE ISLAND?" : GOSUB 400 : IF A$="Y" THEN TP$="YOU KNOW YOU HAVEN'T" : GOSUB 500 : GOTO 3005
+3004  TP$="I KNOW YOU HAVEN'T" : GOSUB 500
+3005  GOSUB 350 : TP$="WHAT ARE YOU ESCAPING FROM, TRULY?" : GOSUB 400 : TP$="BUT THINK. HAVE YOU NOT ALWAYS BEEN A PRISONER?" : GOSUB 400 : IF A$="N" THEN TP$="OH? TRY TO REMEMBER THE LAST TIME YOU WHERE TRULY, TRULY FREE" : GOSUB 500 : GOSUB 350
+3008  TP$="WHO ARE THE PRISONERS AND WHO ARE THE KEEPERS?" : GOSUB 400 : TP$="MEN ARE NOT PRISONERS OF FATE, BUT OF THEIR MINDS" : GOSUB 500 : GOSUB 350
+3010  TP$="HAVE YOU NOT YET REALIZED THERE IS NO PHYSICAL ESCAPE?" : GOSUB 500 : GOSUB 350 : TP$="YOU HAVE ALWAYS BEEN HERE AND WILL ALWAYS BE HERE" : GOSUB 500 : GOSUB 350
+3013  TP$="HOWEVER, THERE IS A FORM OF ESCAPE, IF YOU ARE WILLING" : GOSUB 500 : GOSUB 350 : TP$="IT IS AN ESCAPE FROM THE BONDAGE OF THIS ENSLAVING SOCIETY" : GOSUB 500 : GOSUB 350
+3015  TP$="WOULD YOU CONSIDER JOINING THE PRIESTHOOD?" : GOSUB 400 : IF A$="N" THEN TP$="WON'T YOU RECONSIDER? ANY OTHER PATH MUST SEEM FRUITLESS" : GOSUB 400 : IF A$="N" THEN TP$="WELL, THE OFFER STANDS" : GOSUB 500 : GOTO 2000
+3018  T2%=0 : TP$="LET US SEE IF YOU PASS THE TEST" : GOSUB 500 : GOSUB 350 : TP$="DO YOU USE TRADITIONAL APPROACHES TO PROBLEMS?" : GOSUB 650
+3020  TP$="DO YOU BELIEVE LEARNING SHOULD BE PRACTICAL?" : GOSUB 650
+3021  TP$="DO YOU PRIZE THE INDIVIDUAL ABOVE THE STATE?" : GOSUB 655
+3023  TP$="DO YOU MEASURE SUCCESS BY ECONOMIC MEANS?" : GOSUB 650
+3025  TP$="DO YOU FEEL THAT MANY ARTISTS ARE WEIRD OR IMMORAL?" : GOSUB 650
+3026  TP$="DO YOU THINK SOME CORRUPTION IN GOVERNMENT IS INEVITABLE?" : GOSUB 655
+3027  TP$="DO YOU THINK GOOD WORKS ARE MORE IMPORTANT THAN RELIGOUS BELIEFS?" : GOSUB 655
+3028  TP$="DO YOU BELIEVE THAT PEOPLE SHOULD CONFORM TO SOCIAL EXPECTATIONS?" : GOSUB 650
+3030  TP$="DO YOU JUDGE PEOPLE AND EVENTS MORALISTICALLY?" : GOSUB 650
+3033  ID%=ID%+5* T2% : IF T2%<7 THEN TP$="I AM SORRY. YOU HAVE NOT YET LEARNED" : GOSUB 500 : GOSUB 350 : GOTO 2000
+3035  TP$="GOOD. YOU PASS THE TESTS. NOW YOU MUST PROVE YOUR COMMITMENT" : GOSUB 500 : GOSUB 350 : TP$="YOU MUST DEMONSTRATE THAT YOU HAVE ESCAPED YOUR PREVIOUS LIFE" : GOSUB 500 : MR%=0
+3040  GOSUB 310 : INPUT IP$ : IP$=IP$+"  " : FOR I=1 TO LEN(IP$)-2 : A$=MID$(IP$,I,3) : IF A$=RC$ THEN T2%=0
+3045  NEXT I : IF NOT(T2%) THEN GOTO 30000
+3048  TP$="YOU HAVE NOT YET PROVED. ARE YOU STILL INTERESTED?" : GOSUB 400 : IF A$="N" THEN TP$="ARE YOU SURE?" : GOSUB 400 : IF A$="Y" THEN TP$="I AM SORRY. LIFE WILL BE HARD FOR YOU" : GOSUB 500 : GOSUB 350 : TP$="YOUR CRIMES ARE ABSOLVED" : GOSUB 500 : GOTO 2000
+3050  TP$="OFFER PROOF THAT YOU HAVE GIVEN UP YOUR PAST" : GOSUB 500 : GOTO 3040
+10000  TEXT  : HOME  : FLASH  : FOR I=1 TO 24 : PRINT SPC(40) : NEXT I : GOSUB 300 : VTAB 1 : FOR I=1 TO 23 : HTAB 12 : PRINT "   " : NEXT I : GOSUB 310 : TEXT  : RETURN
+11001  TP$="A SMOOTH SEA NEVER MADE A SKILLFUL SAILOR" : RETURN
+11002  TP$="HE WHO WOULD LEAP MUST MAKE A LONG RUN" : RETURN
+11003  TP$="NOTHING IS EASY TO THE UNWILLING" : RETURN
+11004  TP$="A HARD BEGINNING MAKES A GOOD ENDING" : RETURN
+11005  TP$="I UNDERSTAND" : RETURN
+11006  TP$="PLEASE, CONTINUE" : RETURN
+11007  TP$="GO ON. A FRIENDLY EAR CAN RELIEVE A TROUBLED MIND" : RETURN
+11008  TP$="I HEAR YOU" : RETURN
+11009  TP$="I SEE" : RETURN
+11010  TP$="THE TRUTH SHALL SET YOU FREE" : RETURN
+11011  TP$="DON'T BE AFRAID TO CONFIDE IN ME. NO MAN IS AN ISLAND" : RETURN
+12001  TP$="LIFE HAS NO ANSWERS ;  ONLY MORE QUESTIONS" : RETURN
+12002  TP$="WHO WOULD KNOW BETTER?" : RETURN
+12003  TP$="SEARCH YOURSELF FOR THE TRUTH" : RETURN
+12004  TP$="WE ENTER THE WORLD KNOWING ALL WE NEED TO KNOW" : RETURN
+12005  TP$="ANSWERS ARE A PRISON FOR ONESELF" : RETURN
+12006  TP$="ANSWERS MAY BE FOUND IN THE GOOD BOOK" : RETURN
+13001  TP$="THE ABSENT SHALL NOT BE MADE HEIR" : RETURN
+13002  TP$="EVERY EXIT IS BUT AN ENTRY SOMEWHERE ELSE" : RETURN
+13003  TP$="MAN IS BORN FREE BUT EVERYWHERE HE IS IN CHAINS" : RETURN
+13004  TP$="HE THAT IS DISCONTENTED IN ONE PLACE IS SELDOM HAPPY IN ANOTHER" : RETURN
+13005  TP$="ONLY HE WHO TAKES CARE OF YOU CAN SET YOU FREE" : RETURN
+15001  TP$="CONFESS YOUR SINS" : RETURN
+15002  TP$="GUILT SHOULD NOT BE KEPT BOTTLED UP" : RETURN
+15003  TP$="ARE YOU SURE THERE ISN'T SOMETHING ELSE YOU WOULD LIKE TO TALK ABOUT?" : RETURN
+30000  POP  : NORMAL  : PRINT  : PRINT CH$
+30003  CALL 520"PR.LOSE"
+32000  T1%=PEEK(222) : CALL 1002 : IF T1%=5 OR T1%=6 OR T1%=7 OR T1%=13 THEN RESUME
+32003  NORMAL  : TEXT  : PRINT  : PRINT CH$
+32005  IF T1%=255 THEN CALL 520"PR.SAVE"
+32008  CALL 520"PR.ERR"
 
 ---
 </pre></body></html>
