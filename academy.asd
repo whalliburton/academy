@@ -8,6 +8,7 @@
                (:file "debugging")
                (:file "pretty-printing")
                (:file "input")
+               (:file "files")
                (:file "unicode")
                (:file "words")
                (:file "randomness")
