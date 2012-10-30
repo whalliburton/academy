@@ -29,6 +29,10 @@ this file is verified."
                                                 :if-does-not-exist :create)
      ,@body))
 
+(defmacro with-input-from-file ((stream filename) &body body)
+  `(with-open-file (,stream ,filename :direction :input)
+     ,@body))
+
 (defmacro with-output-to-data-file (filename &body body)
   (let ((bytes (gensym))
         (name (gensym)))
