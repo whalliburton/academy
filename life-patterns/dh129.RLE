@@ -1,0 +1,5 @@
+#C This is generation 4 of "dh133.RLE". 
+#C Generation 1 of this is actually (modulo some symmetry)  generation 2
+#C of the pattern in "diehard.RLE", so we lose by one generation. 
+x = 8, y = 3
+6bo$bo4bo$2o3bobo!

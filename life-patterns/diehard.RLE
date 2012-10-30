@@ -1,0 +1,4 @@
+#C Dies at generation 130. That should be the maximal age for a
+#C pattern consisting of at most 7 cells. 
+x = 8, y = 3
+6bo$2o$bo3b3o!
