@@ -17,6 +17,7 @@
            sunbeam
            remember forget
            sun
+           moiré
            multiplication-table
            peace
            turtle-race
