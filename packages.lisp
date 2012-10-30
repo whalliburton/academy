@@ -27,6 +27,7 @@
            calculate
            play-cards
            chemical
+           plants
            ))
 
 (in-package :academy)
