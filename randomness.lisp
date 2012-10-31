@@ -17,3 +17,6 @@
 (defun random-word ()
   (unless *words* (load-words))
   (aref *words* (random (length *words*))))
+
+;; Randomize with entropy hopefully taken from a "real" world source.
+(setf *random-state* (make-random-state t))
