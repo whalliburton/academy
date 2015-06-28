@@ -24,3 +24,17 @@
         do (funcall printer (car els) stream)
            (unless (null (cdr els))
              (princ delimiter stream))))
+
+(defun string-starts-with (string prefix &key (test #'char=))
+  "Returns true if STRING starts with PREFIX."
+  (let ((mismatch (mismatch prefix string :test test)))
+    (or (not mismatch) (= mismatch (length prefix)))))
+
+(defun string-ends-with (string suffix &key (test #'char=))
+  "Returns true if STRING ends with PREFIX."
+  (let ((mm 0))
+    (loop for end1 from (1- (length string)) downto 0
+          for end2 from (1- (length suffix)) downto 0
+          while (funcall test (aref string end1) (aref suffix end2))
+          do (incf mm))
+    (= mm (length suffix))))
