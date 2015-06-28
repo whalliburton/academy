@@ -17,3 +17,10 @@
            (setf acc nil)
         else do (push char acc)
         finally (return (nreverse (cons (coerce (nreverse acc) 'string) rtn)))))
+
+(defun print-list-delimited (list &optional (stream *standard-output*) (printer #'prin1) (delimiter ","))
+  "Output LIST to STREAM as a comma separated listing."
+  (loop for els on list
+        do (funcall printer (car els) stream)
+           (unless (null (cdr els))
+             (princ delimiter stream))))
