@@ -25,6 +25,12 @@
       (read-sequence seq stream)
       seq)))
 
+(defun slurp-stream (stream)
+  "Load the remander of the contents of STREAM into a string."
+  (let ((seq (make-string (- (file-length stream) (file-position stream)))))
+    (read-sequence seq stream)
+    seq))
+
 (defun flatten (tree)
   "Return a list of all non-nil leaves of TREE."
   (let (result)
