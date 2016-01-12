@@ -27,11 +27,10 @@
 
 (defparameter *sample-unicode-sets*
   `((:arrows                  #x2190 #x21ff)
-    (:foo                     #x2700 #x27FF)
+    (:dingbats                #x2700 #x27FF)
     (:supplemental-arrows-a   #x27F0 #x27FF)
     (:supplemental-arrows-b   #x2900 #x297F)
     (:misc-symbols-and-arrows #x2B00 #x2B2F)
-    (:dingbats                #x2701 #x27BF)
     (:mathematical-operators  #x2200 #x22FF)
     (:box-drawing             #x2500 #x257F)
     (:block-elements          #x2580 #x259F)
@@ -41,7 +40,13 @@
     (:number-forms            #x2150 #x218F)
     (:i-ching-trigrams        #x2630 #x2637)
     (:i-ching-symbols         #x4DC0 #x4DFF)
-    (:braille-patterns        #x2800 #x28FF)))
+    (:braille-patterns        #x2800 #x28FF)
+    (:mahjong                 #x1F000 #x1F02B)
+    (:dominos                 #x1F030 #x1F093)
+    (:playing-cards           #x1F0A0 #x1F0F5)
+    (:emoticons               #x1F601 #x1F64F)
+    (:transportation          #x1F680 #x1F6F3)
+    (:misc-3                  #x1F300 #x1F5FF)))
 
 (defun show-unicode-characters (&optional which)
   "Show many sets of unicode arrows, dingbats, boxes, i-ching, etc."
