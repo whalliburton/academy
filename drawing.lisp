@@ -35,6 +35,9 @@
                             (let ((top (aref bitmap y x))
                                   (bottom (when (< y (1- height)) (aref bitmap (1+ y) x))))
                               (cond
+                                ((or (stringp top) (stringp bottom))
+                                 (incf x (length (or top bottom)))
+                                 (or top bottom))
                                 ((and top bottom) #\FULL_BLOCK)
                                 (top              #\UPPER_HALF_BLOCK)
                                 (bottom           #\LOWER_HALF_BLOCK )

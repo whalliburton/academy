@@ -39,6 +39,7 @@
                (:file "chess")
                (:file "parse-portable-game-notation")
                (:file "plants")
+               (:file "stars")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
