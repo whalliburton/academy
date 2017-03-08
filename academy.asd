@@ -40,6 +40,7 @@
                (:file "parse-portable-game-notation")
                (:file "plants")
                (:file "stars")
+               (:file "cities")
                #+sbcl (:file "sbcl-nuts-and-bolts")
                #+sbcl (:file "git")
                #+sbcl (:file "log")
