@@ -16,16 +16,17 @@
              (return list))))
 
 (defun print-table (rows &key (gap "  ") (align :left))
-  (loop
-    with max-row-length = (apply #'max (mapcar #'length rows))
-    with control-string =
-       (format nil
-               (concatenate
-                'string "~{~~~D" (ecase align (:right "@") (:left "")) "A~^" gap "~}~%")
-               (mapcar (lambda (row) (maximize-length row :key #'princ-to-string))
-                       (rotate-rows-to-columns rows)))
-    for row in (mapcar (lambda (row) (pad-list row max-row-length "")) rows)
-    do (apply #'format t control-string row)))
+  (when rows
+    (loop
+      with max-row-length = (apply #'max (mapcar #'length rows))
+      with control-string =
+                          (format nil
+                                  (concatenate
+                                   'string "~{~~~D" (ecase align (:right "@") (:left "")) "A~^" gap "~}~%")
+                                  (mapcar (lambda (row) (maximize-length row :key #'princ-to-string))
+                                          (rotate-rows-to-columns rows)))
+      for row in (mapcar (lambda (row) (pad-list row max-row-length "")) rows)
+      do (apply #'format t control-string row))))
 
 (defun print-heading (text &key (underline "▀"))
   (terpri)
